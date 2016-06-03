@@ -18,7 +18,7 @@
       * Name is required!
     </div>
     <div *ngIf="name.hasError('minlength') && name.touched" class="error-box">
-      * Minimum name length is 3!
+      * Minimum length is 3 characters!
     </div>
 
 
@@ -26,16 +26,31 @@
       <ion-label floating>Description</ion-label>
       <ion-input type="text" value="" [ngFormControl]="description"></ion-input>
     </ion-item>
+    <div *ngIf="description.hasError('required') && description.touched" class="error-box">
+      * Description is required!
+    </div>
+    <div *ngIf="description.hasError('maxlength') && description.touched" class="error-box">
+      * Maximum length is 140 characters!
+    </div>
 
     <ion-item [class.error]="!prepTime.valid && prepTime.touched">
-      <ion-label floating>Prep Time (Optional)</ion-label>
+      <ion-label floating>Prep Time in minutes (Optional)</ion-label>
       <ion-input type="text" value="" [ngFormControl]="prepTime"></ion-input>
     </ion-item>
+    <div *ngIf="prepTime.hasError('pattern') && prepTime.touched" class="error-box">
+      * Must be a number!
+    </div>
 
     <ion-item [class.error]="!cookingTime.valid && cookingTime.touched">
-      <ion-label floating>Cooking Time</ion-label>
+      <ion-label floating>Cooking Time in minutes</ion-label>
       <ion-input type="text" value="" [ngFormControl]="cookingTime"></ion-input>
     </ion-item>
+    <div *ngIf="cookingTime.hasError('required') && cookingTime.touched" class="error-box">
+      * Cooking Time is required!
+    </div>
+    <div *ngIf="cookingTime.hasError('pattern') && cookingTime.touched" class="error-box">
+      * Must be a number!
+    </div>
 
     <!--Ingredients-->
     <ion-item [class.error]="!ingredients.valid && ingredients.touched">

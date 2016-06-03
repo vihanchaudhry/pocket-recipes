@@ -21,9 +21,9 @@ export class NewRecipePage {
   constructor(public nav: NavController, public fb: FormBuilder) {
     this.recipeForm = fb.group({
       "name": ["", Validators.compose([Validators.required, Validators.minLength(3)])],
-      "description": ["", Validators.compose([Validators.required])],
-      "prepTime": "",
-      "cookingTime": ["", Validators.compose([Validators.required])],
+      "description": ["", Validators.compose([Validators.required, Validators.maxLength(140)])],
+      "prepTime": ["", Validators.compose([Validators.pattern("^[0-9]*$")])],
+      "cookingTime": ["", Validators.compose([Validators.required, Validators.pattern("^[0-9]*$")])],
       "ingredients": ["", Validators.compose([Validators.required])],
       "directions": ["", Validators.compose([Validators.required])]
     });
