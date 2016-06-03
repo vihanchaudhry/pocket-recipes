@@ -51,20 +51,25 @@
     <div *ngIf="cookingTime.hasError('pattern') && cookingTime.touched" class="error-box">
       * Must be a number!
     </div>
+    <br/>
+    
+    <label>Ingredients</label>
+    <ion-list>
+      <ion-item *ngFor="#number of ingredientsCount" [class.error]="!ingredients.valid && ingredients.touched">
+        <ion-input type="text" value="" [ngFormControl]="ingredients"></ion-input>
+      </ion-item>
+      <button (click)="addIngredientRow()" light block>Add an ingredient</button>
+    </ion-list>
 
-    <!--Ingredients-->
-    <ion-item [class.error]="!ingredients.valid && ingredients.touched">
-      <ion-label floating>Ingredients</ion-label>
-      <ion-input type="text" value="" [ngFormControl]="ingredients"></ion-input>
-    </ion-item>
+    <label>Directions</label>
+    <ion-list>
+      <ion-item *ngFor="#number of directionsCount" [class.error]="!directions.valid && directions.touched">
+        <ion-label>Step {{number}}</ion-label>
+        <ion-input type="text" value="" [ngFormControl]="directions"></ion-input>
+      </ion-item>
+      <button (click)="addDirectionRow()" light block>Add a step</button>
+    </ion-list>
 
-    <!--Directions-->
-    <ion-item [class.error]="!directions.valid && directions.touched">
-      <ion-label floating>Directions</ion-label>
-      <ion-input type="text" value="" [ngFormControl]="directions"></ion-input>
-    </ion-item>
-
-    <br/><br/>
     <button type="submit" class="btn btn-success" [disabled]="!recipeForm.valid" block>Submit</button>
 
   </form>
