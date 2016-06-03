@@ -1,15 +1,15 @@
 import {App, IonicApp, Platform} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {GettingStartedPage} from './pages/getting-started/getting-started';
+import {WelcomePage} from './pages/welcome/welcome';
 import {ListPage} from './pages/list/list';
-
+import {AuthPage} from "./pages/auth/auth";
 
 @App({
   templateUrl: 'build/app.html',
   config: {} // http://ionicframework.com/docs/v2/api/config/Config/
 })
 class MyApp {
-  rootPage: any = GettingStartedPage;
+  rootPage: any = AuthPage;
   pages: Array<{title: string, component: any}>
 
   constructor(private app: IonicApp, private platform: Platform) {
@@ -17,8 +17,9 @@ class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Getting Started', component: GettingStartedPage },
-      { title: 'List', component: ListPage }
+      { title: 'Welcome', component: WelcomePage },
+      { title: 'List', component: ListPage },
+      { title: 'Auth', component: AuthPage }
     ];
 
   }

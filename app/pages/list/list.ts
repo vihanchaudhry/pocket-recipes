@@ -1,34 +1,43 @@
 import {Page, NavController, NavParams} from 'ionic-angular';
-
+import "rxjs/Rx";
+import {Http, Headers, HTTP_BINDINGS} from "angular2/http";
+import {BackandService} from "../../services/backandService";
 
 @Page({
-  templateUrl: 'build/pages/list/list.html'
+  templateUrl: 'build/pages/list/list.html',
+  providers: [BackandService]
 })
 export class ListPage {
-  selectedItem: any;
-  icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
 
-  constructor(private nav: NavController, navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
+  psearchQuery: string;
+  items: string[] = [];
+  fromServerData: string[] = [];
 
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
-
-    this.items = [];
-    for(let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  constructor(public backandService: BackandService) {
+    this.psearchQuery = "";
+    this.items =  [];
+    this.getItems("");
   }
 
-  itemTapped(event, item) {
-    this.nav.push(ListPage, {
-      item: item
+  private getItems(searchbar) {
+    this.backandService.useAnoymousAuth();
+    this.backandService.getQuote().subscribe((data) => {
+      this.items = data;
+
+      // set q to the value of the searchbar
+      let q = searchbar.value;
+
+      // if the value is an empty string don"t filter the items
+      if (!q || q.trim() === "") {
+        return;
+      }
+
+      this.items = this.items.filter((v) => {
+        if (v.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
     });
   }
 }

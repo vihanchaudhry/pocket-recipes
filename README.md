@@ -1,7 +1,15 @@
 # Pocket Recipes
-An app for testing storing your recipes
+An app for storing your recipes
 
-## Installation (WIP)
-* Clone this repository
-* Run 'npm install'
-* Run 'ionic serve'
+To run it: install last ionic version:
+<br/>
+<code>
+ npm i ionic@beta 
+</code>
+<br/>
+
+Then run:
+
+<code>
+ ionic serve 
+</code>
