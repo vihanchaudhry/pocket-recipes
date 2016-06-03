@@ -58,7 +58,7 @@
       <ion-item *ngFor="#number of ingredientsCount" [class.error]="!ingredients.valid && ingredients.touched">
         <ion-input type="text" value="" [ngFormControl]="ingredients"></ion-input>
       </ion-item>
-      <button (click)="addIngredientRow()" light block>Add an ingredient</button>
+      <button (click)="addIngredientRow($event)" light block>Add an ingredient</button>
     </ion-list>
 
     <label>Directions</label>
@@ -67,7 +67,7 @@
         <ion-label>Step {{number}}</ion-label>
         <ion-input type="text" value="" [ngFormControl]="directions"></ion-input>
       </ion-item>
-      <button (click)="addDirectionRow()" light block>Add a step</button>
+      <button (click)="addDirectionRow($event)" light block>Add a step</button>
     </ion-list>
 
     <button type="submit" class="btn btn-success" [disabled]="!recipeForm.valid" block>Submit</button>
