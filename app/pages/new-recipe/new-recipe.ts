@@ -22,7 +22,7 @@ export class NewRecipePage {
     this.recipeForm = fb.group({
       "name": ["", Validators.compose([Validators.required, Validators.minLength(3)])],
       "description": ["", Validators.compose([Validators.required])],
-      "prepTime": ["", Validators.compose([Validators.required])],
+      "prepTime": "",
       "cookingTime": ["", Validators.compose([Validators.required])],
       "ingredients": ["", Validators.compose([Validators.required])],
       "directions": ["", Validators.compose([Validators.required])]
