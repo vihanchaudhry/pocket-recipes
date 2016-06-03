@@ -5,10 +5,10 @@ import {Http, Headers, HTTP_BINDINGS} from "angular2/http";
 import {FORM_DIRECTIVES, FormBuilder,  ControlGroup, Validators, AbstractControl} from "angular2/common";
 
 @Page({
-  templateUrl: "build/pages/welcome/welcome.html",
+  templateUrl: "build/pages/new-recipe/new-recipe.html",
   directives: [FORM_DIRECTIVES]
 })
-export class WelcomePage {
+export class NewRecipePage {
 
   recipeForm: ControlGroup;
   name: AbstractControl;
@@ -18,7 +18,7 @@ export class WelcomePage {
   ingredients: AbstractControl;
   directions: AbstractControl;
 
-  constructor(private nav: NavController, public fb: FormBuilder) {
+  constructor(public nav: NavController, public fb: FormBuilder) {
     this.recipeForm = fb.group({
       "name": ["", Validators.compose([Validators.required, Validators.minLength(3)])],
       "description": ["", Validators.compose([Validators.required])],

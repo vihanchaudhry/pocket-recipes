@@ -1,10 +1,10 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Page, NavController, NavParams} from "ionic-angular";
 import "rxjs/Rx";
 import {Http, Headers, HTTP_BINDINGS} from "angular2/http";
 import {BackandService} from "../../services/backandService";
 
 @Page({
-  templateUrl: 'build/pages/list/list.html',
+  templateUrl: "build/pages/list/list.html",
   providers: [BackandService]
 })
 export class ListPage {

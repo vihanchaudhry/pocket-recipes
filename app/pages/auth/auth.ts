@@ -1,18 +1,12 @@
-import {Page} from 'ionic-angular';
+import {Page} from "ionic-angular";
 import {Component} from "angular2/core";
 import {bootstrap} from "angular2/platform/browser";
 import "rxjs/Rx";
 import {Http, Headers, HTTP_BINDINGS} from "angular2/http";
 import {BackandService} from "../../services/backandService";
 
-/*
-  Generated class for the AuthPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Page({
-  templateUrl: 'build/pages/auth/auth.html',
+  templateUrl: "build/pages/auth/auth.html",
   providers: [BackandService]
 
 })
@@ -41,7 +35,7 @@ export class AuthPage {
 
                     this.auth_status = `Error: ${errorMessage}`;
                     this.is_auth_error = true;
-                    this.logError(err)
+                    this.logError(err);
                 },
                 () => console.log("Finish Auth"));
     }
