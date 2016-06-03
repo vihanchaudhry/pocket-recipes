@@ -48,12 +48,14 @@ export class NewRecipePage {
     }
   }
 
-  addIngredientRow(): void {
+  addIngredientRow(event: Event): void {
+    event.preventDefault();
     let nextNumber: number = this.ingredientsCount.length + 1;
     this.ingredientsCount.push(String(nextNumber));
   }
 
-  addDirectionRow(): void {
+  addDirectionRow(event: Event): void {
+    event.preventDefault();
     let nextNumber: number = this.directionsCount.length + 1;
     this.directionsCount.push(String(nextNumber));
   }
