@@ -2,7 +2,7 @@ import {Page, NavController} from "ionic-angular";
 import {Component} from "angular2/core";
 import "rxjs/Rx";
 import {Http, Headers, HTTP_BINDINGS} from "angular2/http";
-import {FORM_DIRECTIVES, FormBuilder,  ControlGroup, Validators, AbstractControl} from "angular2/common";
+import {FORM_DIRECTIVES, FormBuilder,  ControlGroup, Validators, Control, AbstractControl} from "angular2/common";
 
 @Page({
   templateUrl: "build/pages/new-recipe/new-recipe.html",
@@ -15,11 +15,8 @@ export class NewRecipePage {
   description: AbstractControl;
   prepTime: AbstractControl;
   cookingTime: AbstractControl;
-  ingredients: AbstractControl;
-  directions: AbstractControl;
-
-  ingredientsCount: string[];
-  directionsCount: string[];
+  ingredients: AbstractControl[];
+  directions: AbstractControl[];
 
   constructor(public nav: NavController, public fb: FormBuilder) {
     this.recipeForm = fb.group({
@@ -27,19 +24,22 @@ export class NewRecipePage {
       "description": ["", Validators.compose([Validators.required, Validators.maxLength(140)])],
       "prepTime": ["", Validators.compose([Validators.pattern("^[0-9]*$")])],
       "cookingTime": ["", Validators.compose([Validators.required, Validators.pattern("^[0-9]*$")])],
-      "ingredients": ["", Validators.compose([Validators.required])],
-      "directions": ["", Validators.compose([Validators.required])]
+      "ingredient1": ["", Validators.compose([Validators.required])],
+      "direction1": ["", Validators.compose([Validators.required])]
     });
+
+    this.ingredients = [];
 
     this.name = this.recipeForm.controls["name"];
     this.description = this.recipeForm.controls["description"];
     this.prepTime = this.recipeForm.controls["prepTime"];
     this.cookingTime = this.recipeForm.controls["cookingTime"];
-    this.ingredients = this.recipeForm.controls["ingredients"];
-    this.directions = this.recipeForm.controls["directions"];
-
-    this.ingredientsCount = ["1"];
-    this.directionsCount = ["1"];
+    this.ingredients = [
+      this.recipeForm.controls["ingredient1"]
+      ];
+    this.directions = [
+      this.recipeForm.controls["direction1"]
+    ];
   }
 
   onSubmit(value: string): void {
@@ -50,13 +50,17 @@ export class NewRecipePage {
 
   addIngredientRow(event: Event): void {
     event.preventDefault();
-    let nextNumber: number = this.ingredientsCount.length + 1;
-    this.ingredientsCount.push(String(nextNumber));
+    let name = "ingredient" + (this.ingredients.length + 1);
+
+    this.recipeForm.addControl(name, new Control("", Validators.required));
+    this.ingredients.push(this.recipeForm.controls[name]);
   }
 
   addDirectionRow(event: Event): void {
     event.preventDefault();
-    let nextNumber: number = this.directionsCount.length + 1;
-    this.directionsCount.push(String(nextNumber));
+    let name = "direction" + (this.directions.length + 1);
+
+    this.recipeForm.addControl(name, new Control("", Validators.required));
+    this.directions.push(this.recipeForm.controls[name]);
   }
 }
